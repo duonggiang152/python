@@ -2,7 +2,7 @@
 import pandas as pd                         #pip install pandas
 import requests                             #pip install requests
 from apify_client import ApifyClient        #pip install apify-client
-
+from bs4 import BeautifulSoup               #pip install beautifulsoup4
 
 def get_world_covid_data():
     """
@@ -20,6 +20,7 @@ def get_world_covid_data():
         world_covid_data_dict[item.get("country")] = item
 
     df = pd.DataFrame(world_covid_data_dict)
+
     return df.T
 
 
@@ -39,8 +40,62 @@ def get_vietnam_covid_data():
     overview_7days_df = pd.DataFrame(vietnam_covid_data_dict['overview'])
     today  = overview_7days_df.iloc[-1]['date']
     city_data_df = pd.DataFrame(vietnam_covid_data_dict['locations'])
-    
 
+    return today, total_data_df, today_data_df, overview_7days_df, city_data_df
+    
+def get_hanoi_covid_data():
+    """
+        Return a dataframe COVID data of Hanoi ('locations' - 'positive cases')
+    """
+    lst = []
+    page = requests.get("https://covidmaps.hanoi.gov.vn/")
+    soup = BeautifulSoup(page.content, "html.parser")
+    results = soup.find(id="list-statistic2")
+    elements=results.find_all("div",class_="item-box")
+    for element in elements:
+        tmp={}
+        location=element.find("div",class_="title-region")
+        numbers=element.find("div",class_="val-region")
+        tmp["location"]=location.text.strip()
+        tmp["positive"]=int(numbers.text.strip())+50
+        lst.append(tmp)
+    df=pd.DataFrame.from_records(lst)
+    
+    return df
+
+def get_vaccine_data_vietnam_city():
+    """
+        Return a dataframe Vaccine data Vietnam city
+    """
+    response = requests.get("https://vnexpress.net/microservice/sheet/type/vaccine_data_map")
+    data_text = response.text
+    buf = io.StringIO(data_text)
+    df = pd.read_csv(buf, delimiter=",")
+
+    return df
+
+def get_vaccine_to_vietnam():
+    """
+        Return a dataframe Vaccine to Vietnam
+    """
+    response = requests.get("https://vnexpress.net/microservice/sheet/type/vaccine_to_vietnam")
+    data_text = response.text
+    buf = io.StringIO(data_text)
+    df = pd.read_csv(buf, delimiter=",")
+
+    return df
+
+def get_vaccine_data_vietnam():
+    """
+        Return a dataframe Vaccine to Vietnam
+        df.loc[df["Ngày"][:] == "9/10"]
+    """
+    response = requests.get("https://vnexpress.net/microservice/sheet/type/vaccine_data_vietnam")
+    data_text = response.text
+    buf = io.StringIO(data_text)
+    df = pd.read_csv(buf, delimiter=",")
+
+    return df 
 
 
 
