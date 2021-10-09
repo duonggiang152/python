@@ -6,7 +6,7 @@ from dash import dcc
 from dash.dependencies import Input, Output
 
 # Run the app
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.MATERIA])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SANDSTONE], update_title='Đang tải...')
 app.layout = html.Div([
     # Row 1: Title(co the sua thanh navbar)
     dbc.Row(dbc.Col(html.H1("Thông tin COVID"),
@@ -22,7 +22,7 @@ app.layout = html.Div([
                 ),
         dbc.Col(html.H3("Information here"),
                 width=2,
-                style={'background-color': 'yellow'})
+                style={'background-color': 'pink'})
     ]),
     # Row 3: Bieu do 1
     dbc.Row(

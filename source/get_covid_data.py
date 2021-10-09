@@ -25,18 +25,28 @@ def get_world_covid_data():
 
 def get_vietnam_covid_data():
     """
-        return 
+        Return COVID data of VietNam, world:
+            (str)today = today's date\n
+            (df)total_data_df: 'death', 'treating', 'cases', 'recovered'  (today_data_df.internal['death'])\n
+            (df)today_data_df: 'death', 'treating', 'cases', 'recovered'\n
+            (df)overview_7days_df: 'date', 'death', 'treating', 'cases', 'recovered', 'avgCases7day', 'avgRecovered7day', 'avgDeath7day'\n
+            (df)city_data_df: 'name','death', 'treating', 'cases', 'recovered', 'casesToday'
     """
     response = requests.get("https://static.pipezero.com/covid/data.json")
     vietnam_covid_data_dict = response.json()
-    print(vietnam_covid_data_dict.keys())
+    total_data_df = pd.DataFrame(vietnam_covid_data_dict['total'])
+    today_data_df = pd.DataFrame(vietnam_covid_data_dict['today'])
+    overview_7days_df = pd.DataFrame(vietnam_covid_data_dict['overview'])
+    today  = overview_7days_df.iloc[-1]['date']
+    city_data_df = pd.DataFrame(vietnam_covid_data_dict['locations'])
+    
 
 
 
 
 
 def main():
-    get_vietnam_covid_data()
+    return
 
 
 if __name__ == "__main__":
