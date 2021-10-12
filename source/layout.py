@@ -7,6 +7,11 @@ from dash.dependencies import Input, Output
 
 # Run the app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SANDSTONE], update_title='Đang tải...')
+app.title = "COVID-19 Dashboard"
+
+#-----------------
+#   layout
+#-----------------
 app.layout = html.Div([
     # Row 1: Title(co the sua thanh navbar)
     dbc.Row(dbc.Col(html.H1("Thông tin COVID"),
@@ -34,7 +39,7 @@ app.layout = html.Div([
                     width={'size':3}
                     ),
             dbc.Col(dcc.Graph(id='graph-1', figure={}),
-                    width={'size': 8, "offset": 2},
+                    width={'size': 8, "offset": 3},
                     style={'background-color': 'red'}
                     )
         ], no_gutters=True

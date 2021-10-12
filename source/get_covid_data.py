@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup               #pip install beautifulsoup4
 
 def get_world_covid_data():
     """
-    Return a dataframe of COVID data of 45 countries include:
+    Return a dataframe of COVID data of 45 countries include:\n
     'infected', 'tested', 'recovered', 'deceased', 'country', 'moreData', 'historyData', 'sourceUrl', 'lastUpdatedApify', 'lastUpdatedSource'
     """
     world_covid_data_dict = {} 
