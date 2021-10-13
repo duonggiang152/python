@@ -51,6 +51,8 @@ app_dash.layout = html.Div([
     html.Div([
         html.H2("Bieu do 2"),
         dcc.Dropdown(id='drop-2', placeholder='dropdown',
+
+
                          options=[{'label': 'Option A', 'value': 'optA'},
                                   {'label': 'Option B', 'value': 'optB'}]),
         dcc.Graph(id='graph-2', figure={})
