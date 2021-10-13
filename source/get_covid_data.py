@@ -20,8 +20,10 @@ def get_world_covid_data():
         world_covid_data_dict[item.get("country")] = item
 
     df = pd.DataFrame(world_covid_data_dict)
-
-    return df.T
+    df = df.T
+    df['country'] = df.index
+    dff = df[['country', 'infected', 'recovered']].copy()
+    return dff
 
 
 def get_vietnam_covid_data():
@@ -97,5 +99,8 @@ def get_vaccine_data_vietnam():
 
     return df 
 
-(a,b,c,d,e) = get_vietnam_covid_data()
-print(d)
+def main():
+    return
+
+if __name__ == "__main__":    
+    main()
