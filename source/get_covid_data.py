@@ -97,12 +97,5 @@ def get_vaccine_data_vietnam():
 
     return df 
 
-
-
-
-def main():
-    return
-
-
-if __name__ == "__main__":
-    main()
+(a,b,c,d,e) = get_vietnam_covid_data()
+print(d)
