@@ -1,29 +1,20 @@
 # This Python file uses the following encoding: utf-8
-import pandas as pd                         #pip install pandas
-import requests                             #pip install requests
-from apify_client import ApifyClient        #pip install apify-client
-from bs4 import BeautifulSoup               #pip install beautifulsoup4
+import pandas as pd                         
+import requests                             
+from bs4 import BeautifulSoup               
 
 def get_world_covid_data():
     """
-    Return a dataframe of COVID data of 45 countries include:\n
-    'infected', 'tested', 'recovered', 'deceased', 'country', 'moreData', 'historyData', 'sourceUrl', 'lastUpdatedApify', 'lastUpdatedSource'
+    Return a dataframe of COVID data of 225 countries
     """
-    world_covid_data_dict = {} 
+    #Source: Our World In Data: "https://github.com/owid/covid-19-data"
+    data_requests = requests.get(
+        'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.json')
+
+    world_data = dict(data_requests.json())
+    df = pd.DataFrame(world_data).T
     
-    client = ApifyClient("apify_api_k4mBbzZyCQQBGm9bHEMngYQ92RlLFp0t6DPQ")  #APIFY token cua @Manh
-    run_input = {}
-    run = client.actor("petrpatek/covid-19-aggregator").call(run_input=run_input) #call actor
-
-    for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-        #each item is a dict
-        world_covid_data_dict[item.get("country")] = item
-
-    df = pd.DataFrame(world_covid_data_dict)
-    df = df.T
-    df['country'] = df.index
-    dff = df[['country', 'infected', 'recovered']].copy()
-    return dff
+    return df
 
 
 def get_vietnam_covid_data():
@@ -35,8 +26,11 @@ def get_vietnam_covid_data():
             (df)overview_7days_df: 'date', 'death', 'treating', 'cases', 'recovered', 'avgCases7day', 'avgRecovered7day', 'avgDeath7day'\n
             (df)city_data_df: 'name','death', 'treating', 'cases', 'recovered', 'casesToday'
     """
+    
+    #Source: "https://covid19.gov.vn/"
     response = requests.get("https://static.pipezero.com/covid/data.json")
     vietnam_covid_data_dict = response.json()
+
     total_data_df = pd.DataFrame(vietnam_covid_data_dict['total'])
     today_data_df = pd.DataFrame(vietnam_covid_data_dict['today'])
     overview_7days_df = pd.DataFrame(vietnam_covid_data_dict['overview'])

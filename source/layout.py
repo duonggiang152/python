@@ -10,7 +10,7 @@ from flask import Response
 
 import dash
 from dash.html.Br import Br
-from dash_extensions import DeferScript
+# from dash_extensions import DeferScript
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
