@@ -21,6 +21,5 @@ def map_world():
                         labels={'WORLD COVID-19 CASES MAP'},
                         template='plotly')
     return fig
-def table_world():
     
     
