@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 def get_world_covid_data():
     """
-    Return a dataframe of COVID data of 225 countries
+    Return a dataframe of COVID data of 215 countries
     """
     #Source: Our World In Data: "https://github.com/owid/covid-19-data"
     data_requests = requests.get(
@@ -13,7 +13,7 @@ def get_world_covid_data():
 
     world_data = dict(data_requests.json())
     df = pd.DataFrame(world_data).T
-    
+
     return df
 
 
