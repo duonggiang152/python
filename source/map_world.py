@@ -18,14 +18,15 @@ def map_world():
     """Return a graph about number of global covid-19 cases """
     return dcc.Graph(
         id='world-map',
-        fig=px.choropleth(data_frame=dff,locations='iso_code',locationmode='ISO-3',
+        figure=px.choropleth(data_frame=dff,locations='iso_code',locationmode='ISO-3',
                         color='Cases',
                         hover_data=['location','Cases','Vaccinated rate'],
                         color_continuous_scale="mint",
                         color_continuous_midpoint=1000000,
                         range_color=[0,50000000],
                         labels={'WORLD COVID-19 CASES MAP'},
-                        template='plotly')
+                        template='plotly'
+                        )
     
     )
 
