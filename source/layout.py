@@ -16,7 +16,7 @@ from dash import dcc
 from dash.dependencies import Input, Output
 # -----------------
 #import modul render & data
-
+from map_world import *
 from get_covid_data import get_vietnam_covid_data
 from render_Box_Covid_VN import render_Box_Covid_VN
 # -------------
@@ -38,7 +38,8 @@ app_dash.layout = html.Div([
     #  1st block
     #  ban do the gioi + data table
     html.Section([
-        html.Div([html.H2("Bieu do 1"),
+        html.Div([html.H2("World Map"),
+            map_world(),
             dcc.Dropdown(id='drop-1', placeholder='dropdown',
                          options=[{'label': 'Option A', 'value': 'optA'},
                                   {'label': 'Option B', 'value': 'optB'}]),
