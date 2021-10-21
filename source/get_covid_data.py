@@ -59,7 +59,7 @@ def get_hanoi_covid_data():
         location=element.find("div",class_="title-region")
         numbers=element.find("div",class_="val-region")
         tmp["location"]=location.text.strip()
-        tmp["positive"]=int(numbers.text.strip())+50
+        tmp["positive"]=int(numbers.text.strip())
         lst.append(tmp)
     df=pd.DataFrame.from_records(lst)
     
