@@ -13,8 +13,9 @@ def get_world_covid_data():
 
     world_data = dict(data_requests.json())
     df = pd.DataFrame(world_data).T
-
-    return df
+    
+    return df[['location', 'continent', 'total_cases', 'total_deaths',
+                        'last_updated_date', 'people_vaccinated', 'total_cases_per_million', 'total_deaths_per_million', 'people_vaccinated_per_hundred', 'population', 'people_fully_vaccinated']]
 
 
 def get_vietnam_covid_data():
