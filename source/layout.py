@@ -94,6 +94,10 @@ def dataFristBlock():
 def undate(c):
     print("halo {}".format(c))
     return "halo {}".format(c)
+
+
+
+
 # run server
 if __name__ == "__main__":
     app_dash.run_server()
