@@ -94,14 +94,9 @@ app.layout = html.Div([
                     {'if': {'column_id': 'people_vaccinated'},
                      'width': '25%', 'textAlign': 'center'},
                 ],
-                style_data_conditional=[
-                    # {
-                    #     'if': {'row_index': 'odd'},
-                    #     'backgroundColor': 'rgb(220, 220, 220)',
-                    # }
-                ],
+                style_data_conditional=[],
                 style_header={
-                    'backgroundColor': 'rgb(210, 210, 210)',
+                    'backgroundColor': '#55CBCD',
                     'color': 'black',
                     'fontWeight': 'bold'
                 }
@@ -171,7 +166,7 @@ def highlight_selectedRow(chosen_rows):
                 },
                 {
                     'if': {'row_index': chosen_rows},
-                    'backgroundColor': 'rgb(252, 164, 214)'
+                    'backgroundColor': '#FF968A'
                 },
             ]
     return style_data_conditional
